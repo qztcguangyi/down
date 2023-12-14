@@ -328,23 +328,7 @@
        }else{
        	$(".ios_down").css("display","none")
        }
-       if(window.Client.isWechat){
-       	$(".dwnurl").attr("href","http://47.119.145.125:8088/123.apk")
-       	$(".dwnurl").on("click",function(){
-           // _czc && _czc.push(['_trackEvent', 'button', '微信点击', '下载']);
-       		$(".fuceng_wai").css("display","block")
-       		$(".fuceng_wai").on("click",function(){
-       			$(".fuceng_wai").css("display","none")
-       		})
-       	})
-       }
-       window.onload = function(){
-       	if (!window.Client.isiOS){
-       		$(".dwnurl").click();
-            //_czc && _czc.push(['_trackEvent', 'button', '非ios点击', '下载']);
-
-       	}
-       }
+     }
     </script>
 
 </body></html>
