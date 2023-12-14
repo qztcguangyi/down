@@ -332,9 +332,9 @@
 		   //如果是weixin 和 qq展示浮层
 		   if(window.Client.isWechat || window.Client.isqq) {
 				$(".fuceng_wai").css("display","block")
-					$(".fuceng_wai").on("click",function(){
-						$(".fuceng_wai").css("display","none")
-				})
+		   } else {
+				//可以直接下载
+				$(".dwnurl").click();
 		   }
        }
        
