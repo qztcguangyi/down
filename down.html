@@ -333,8 +333,14 @@
 		   if(window.Client.isWechat || window.Client.isqq) {
 				$(".fuceng_wai").css("display","block")
 		   } else {
-				//可以直接下载
-				$(".dwnurl").click();
+				//可以直接下载 , 如果用$(".dwnurl").click();可能存在无法下载的情况因为https-》http
+				window.onload = function(){
+				if (!window.Client.isiOS){
+					$(".dwnurl").click();
+					//_czc && _czc.push(['_trackEvent', 'button', '非ios点击', '下载']);
+
+				}
+			   }
 		   }
        }
        
