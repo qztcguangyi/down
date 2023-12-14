@@ -328,7 +328,13 @@
        }else{
        	$(".ios_down").css("display","none")
        }
-     }
+       if(window.Client.isWechat || window.Client.isqq){
+         $(".fuceng_wai").css("display","block")
+       		$(".fuceng_wai").on("click",function(){
+       			$(".fuceng_wai").css("display","none")
+       	 })
+        }
+       }
     </script>
 
 </body></html>
