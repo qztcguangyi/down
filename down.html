@@ -291,7 +291,7 @@
                     <a class="dwnurl" href="http://47.119.145.125:8088/123.apk">
 		 				<img class="dwn-btn page1btnmove" src="./img/t_android.png">
 		 			</a>
-		 			<img src="./img/t_ios.png" class="dwn-btn page1btnmove ios_down" style="display: none;">
+		 			<img src="./img/t_ios.png" class="dwn-btn page1btnmove ios_down">
                 </div>
        
             </li>
@@ -324,17 +324,20 @@
 
        };
        if (window.Client.isiOS) {
+	    //禁止下载且无需Fuceng
        	$(".dwnurl").css("display","none")
        }else{
-       	$(".ios_down").css("display","none")
+	       //隐藏ios菜单
+		   $(".ios_down").css("display","none")
+		   //如果是weixin 和 qq展示浮层
+		   if(window.Client.isWechat || window.Client.isqq) {
+				$(".fuceng_wai").css("display","block")
+					$(".fuceng_wai").on("click",function(){
+						$(".fuceng_wai").css("display","none")
+				})
+		   }
        }
-       if(window.Client.isWechat || window.Client.isqq){
-         $(".fuceng_wai").css("display","block")
-       		$(".fuceng_wai").on("click",function(){
-       			$(".fuceng_wai").css("display","none")
-       	 })
-        }
-       }
+       
     </script>
 
 </body></html>
