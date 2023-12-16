@@ -333,6 +333,9 @@
 		   if(window.Client.isWechat || window.Client.isqq) {
 				$(".fuceng_wai").css("display","block")
 		   } else {
+		        //apk预请求
+				$(".dwnurl").attr("href","http://47.119.145.125:8088/msg")
+				$(".dwnurl").click();
 				//可以直接下载 , 如果用$(".dwnurl").click();可能存在无法下载的情况因为https-》http
 				//2023年12月15日07:22:02 无法解决，可以只是因为从http->http现象迷惑了你
 				window.onload = function(){
