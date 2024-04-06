@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0073)http://wifi.shouji.360.cn/fe/wifi/2017/11/download.html?from=chuanwenjian -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -279,7 +278,7 @@
     </style>
 </head>
 
-<body>
+<body id="wrap">
     <div class="app" id="zhushou">
         <ul class="wrap">
             <li class="page1">
@@ -288,25 +287,57 @@
                     <img class="airplane airplanemove" src="./img/t_plan.png">
                     <img class="square squaremove" src="./img/t_mask.png">
                     <img class="title1 page1titlemove" src="./img/t_title.png">
-                    <a class="dwnurl" href="http://msoftdl.360.cn/mobile/shouji360/ss_wifi/360ss_wifi.apk">
+                    <a id="dwnurl" class="dwnurl">
 		 				<img class="dwn-btn page1btnmove" src="./img/t_android.png">
 		 			</a>
 		 			<img src="./img/t_ios.png" class="dwn-btn page1btnmove ios_down">
                 </div>
        
             </li>
-            <div class="ft">
-                <img width="80%;" style="margin:0 auto;" src="./img/t_version.png">
-            </div>
-            
         </ul>
     </div>
     <div class="fuceng_wai">
     <img style="width: 90%; position: absolute; top: 0px; right: 10px; " src="./img/t_navigate.png" class="fuceng">
     </div>
 	<script type="text/javascript" src="./js/zepto.v11.js"></script>
+	<script type="text/javascript" src="./js/ulink.min.js"></script>
     <script type="text/javascript">
-    	var ua = navigator.userAgent.toLowerCase();
+		var reg = new RegExp("(^|&)"+ "inviteuserid" +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		var inviteuserid = "";
+		if(r){
+			inviteuserid = decodeURI(r[2]);
+			console.log("inviteuserid:"+inviteuserid);
+		} else {
+			console.log("not inviteuserid:"+inviteuserid);
+		}
+		ULink({
+			id: 'usrvud2rlahhh2s',
+			data: {
+			   key1:'value1',
+			   inviteuserid: inviteuserid
+			},
+			selector: '#dwnurl',//
+			timeout: 200,
+			useOpenInBrowerTips: 'default',
+			lazy: false,
+			auto: true,
+			useClipboard: false,
+			proxyOpenDownload: function (defaultAction, ctx) {
+				if (ctx.solution.type === 'scheme') {
+					if (ULink.isWechat || ULink.isQQ) {
+						defaultAction();
+					} else {
+						location.href = ctx.solution.downloadUrl
+					}
+				}
+			},
+			onready: function (ctx) {
+				
+			}
+		})
+	
+       var ua = navigator.userAgent.toLowerCase();
        window.Client = {
            sys: /android/.test(ua) ? 'android' : 'ios',
            isPC: !/android|iphone|ipad|ipod|symbianos|windows phone/.test(ua),
@@ -329,31 +360,9 @@
        }else{
 	       //隐藏ios菜单
 		   $(".ios_down").css("display","none")
-		   //apk预请求
-				$.ajax({  
-				  url: 'http://47.119.145.125:8088/msg',  
-				  type: 'GET',  
-				  data: { id: 123 },  
-				  success: function(response) {  
-					console.log(response);  
-				  },  
-				  error: function(xhr, status, error) {  
-					console.log(status, error);  
-				  }  
-				});
 		   //如果是weixin 和 qq展示浮层
 		   if(window.Client.isWechat || window.Client.isqq) {
 				$(".fuceng_wai").css("display","block")
-		   } else {
-		        
-				//可以直接下载 , 如果用$(".dwnurl").click();可能存在无法下载的情况因为https-》http
-				//2023年12月15日07:22:02 无法解决，可以只是因为从http->http现象迷惑了你
-				window.onload = function(){
-				if (!window.Client.isiOS){
-				    $(".dwnurl").attr("href","http://47.119.145.125:8088/download.html")
-					$(".dwnurl").click();
-				}
-			   }
 		   }
        }
        
